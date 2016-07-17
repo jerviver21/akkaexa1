@@ -5,6 +5,12 @@ public class NumberRangeMessage {
 	private long endNumber;
 	
 	
+	public NumberRangeMessage(long startNumber, long endNumber){
+		this.startNumber = startNumber;
+		this.endNumber = endNumber;
+	}
+	
+	
 	public long getStartNumber() {
 		return startNumber;
 	}

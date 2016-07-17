@@ -3,6 +3,9 @@ package edu.globant.akka.example3;
 import akka.actor.UntypedActor;
 
 public class PrimeWorker extends UntypedActor{
+	
+	private long startNumber;
+	private long endNumber;
 
 	@Override
 	public void onReceive(Object msg) throws Exception {
@@ -40,5 +43,13 @@ public class PrimeWorker extends UntypedActor{
         }
         return true;
     }
+
+	public long getStartNumber() {
+		return startNumber;
+	}
+
+	public long getEndNumber() {
+		return endNumber;
+	}
 
 }

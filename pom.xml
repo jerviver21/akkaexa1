@@ -70,14 +70,7 @@
 			      </goals>
 			    </execution>
 			  </executions>
-			  <configuration>
-			    <mainClass>edu.globant.akka.example2.Main</mainClass>
-			    <!-- <mainClass>edu.globant.akka.main.Main2</mainClass> -->
-			    <arguments>
-			      <argument>foo</argument>
-			      <argument>bar</argument>
-			    </arguments>
-			  </configuration>
+			 
 			</plugin>
 		</plugins>
 	</build>
