@@ -23,6 +23,8 @@ public class PrimeCalculator
         primeMaster.tell( new NumberRangeMessage( startNumber, endNumber ), null );
     }
 
+    
+    //Ver Primemaster para ver las diferentes formas de ejecutar la concurrencia, de cualquier forma se obtiene una mejora sustancial en performance.
     public static void main( String[] args )
     {
         if( args.length < 2 )
