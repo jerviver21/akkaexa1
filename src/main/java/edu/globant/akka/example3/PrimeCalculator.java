@@ -37,6 +37,6 @@ public class PrimeCalculator
         PrimeCalculator primeCalculator = new PrimeCalculator();
         System.out.println("Init Date: "+LocalTime.now());
         primeCalculator.calculate( startNumber, endNumber );
-        System.out.println("End Date: "+LocalTime.now());
+        System.out.println("End Date for main Thread: "+LocalTime.now());
     }
 }

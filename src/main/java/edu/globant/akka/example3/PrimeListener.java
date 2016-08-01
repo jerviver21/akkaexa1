@@ -12,7 +12,7 @@ public class PrimeListener extends UntypedActor
         if( message instanceof Result )
         {
             Result result = ( Result )message;
-        	System.out.println(LocalTime.now());
+        	System.out.println("Real End Date:"+LocalTime.now());
             System.out.print( result.getResults().size() + "  Primos - First: "+result.getResults().get(0)+", " );
 
             // Exit

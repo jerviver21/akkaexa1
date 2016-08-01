@@ -6,8 +6,7 @@ import java.util.List;
 import akka.actor.ActorRef;
 import akka.actor.Props;
 import akka.actor.UntypedActor;
-import akka.routing.ActorRefRoutee;
-import akka.routing.RoundRobinRoutingLogic;
+import akka.routing.RoundRobinPool;
 import akka.routing.Routee;
 import akka.routing.Router;
 
@@ -26,10 +25,14 @@ public class PrimeMaster extends UntypedActor{
 		this.listener = listener;
 		
 		List<Routee> routees = new ArrayList<>();
-		workerRouter = getContext().actorOf(Props.create(PrimeWorker.class), "workerRouter");
-		getContext().watch(workerRouter);
-		routees.add(new ActorRefRoutee(workerRouter));
-		router = new Router(new RoundRobinRoutingLogic(), routees);
+		
+		/*for(int i=0 ; i <numberOfWorkers; i++){
+			ActorRef workerRouter = getContext().actorOf(Props.create(PrimeWorker.class), "workerRouter"+i);
+			getContext().watch(workerRouter);
+			routees.add(new ActorRefRoutee(workerRouter));
+		}
+		router = new Router(new RoundRobinRoutingLogic(), routees);*/
+		workerRouter =  getContext().actorOf(new RoundRobinPool(numberOfWorkers/2).props(Props.create(PrimeWorker.class)), "router2");
 		
 		
 	}
@@ -59,7 +62,9 @@ public class PrimeMaster extends UntypedActor{
                 }
 
                 // Send a new message to the work router for this subset of numbers
-                router.route( new NumberRangeMessage( startNumber, endNumber ), getSelf() );
+                //router.route( new NumberRangeMessage( startNumber, endNumber ), getSelf() );
+                //getContext().actorOf(Props.create(PrimeWorker.class), "workerRouter"+i).tell(new NumberRangeMessage( startNumber, endNumber ), getSelf() );
+                workerRouter.tell(new NumberRangeMessage( startNumber, endNumber ), getSelf() );
             }
         }
         else if( message instanceof Result )
